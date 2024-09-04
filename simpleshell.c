@@ -18,8 +18,7 @@ void read_command(char *cmd, char *args[], int *background) {
 
     // get user command
     printf("simple_shell$: ");
-    if (!fgets(cmd_line, sizeof(cmd_line), stdin))
-        exit(1);  // Saia se ocorrer erro na leitura
+	fgets(cmd_line, sizeof(cmd_line), stdin);
 
     // remove \n in the end of the user input
     size_t len = strlen(cmd_line);
@@ -83,7 +82,8 @@ int main(int argc, char *argv[]) {
             // it means execv failed (returns -1)
             perror("Erro: comando não encontrado");
             exit(1);
-        } else if (pid > 0) {
+        }
+		else if (pid > 0)
             if (!background)
                 wait(NULL);  // waits for the non-background
                 // child process to end
